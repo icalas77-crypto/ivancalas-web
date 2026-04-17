@@ -1,0 +1,24 @@
+# Robots.txt for ivancalas.es
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /.next/
+Disallow: /node_modules/
+
+# Specific rules for common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay to avoid overloading the server
+User-agent: *
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://ivancalas.es/sitemap.xml
+
+# Host
+Host: https://ivancalas.es
