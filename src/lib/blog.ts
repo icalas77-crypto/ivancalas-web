@@ -2,10 +2,28 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { BlogPost } from './utils';
+import { getWordPressPosts, wordPressToBlogPost } from './wordpress';
 
 const blogsDirectory = path.join(process.cwd(), 'public/blog');
 
+/**
+ * Get blog posts from WordPress (primary) with fallback to local files
+ */
 export async function getBlogPosts(): Promise<BlogPost[]> {
+  try {
+    // Try to fetch from WordPress first
+    const wpPosts = await getWordPressPosts(50);
+    
+    if (wpPosts.length > 0) {
+      // Convert WordPress posts to BlogPost format
+      const blogPosts = await Promise.all(wpPosts.map(post => wordPressToBlogPost(post)));
+      return blogPosts;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch posts from WordPress, falling back to local files:', error);
+  }
+
+  // Fallback to local markdown files if WordPress is unavailable
   try {
     if (!fs.existsSync(blogsDirectory)) {
       return [];
@@ -41,6 +59,19 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
+    // Try to fetch from WordPress first
+    const { getWordPressPostBySlug } = await import('./wordpress');
+    const wpPost = await getWordPressPostBySlug(slug);
+    
+    if (wpPost) {
+      return await wordPressToBlogPost(wpPost);
+    }
+  } catch (error) {
+    console.warn(`Failed to fetch post from WordPress (${slug}), falling back to local:`, error);
+  }
+
+  // Fallback to local markdown file
+  try {
     const filePath = path.join(blogsDirectory, `${slug}.md`);
 
     if (!fs.existsSync(filePath)) {
@@ -67,6 +98,17 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function getBlogSlugs(): Promise<string[]> {
+  try {
+    // Try to get slugs from WordPress first
+    const wpPosts = await getWordPressPosts(100);
+    if (wpPosts.length > 0) {
+      return wpPosts.map(post => post.slug);
+    }
+  } catch (error) {
+    console.warn('Failed to fetch slugs from WordPress, falling back to local files:', error);
+  }
+
+  // Fallback to local markdown files
   try {
     if (!fs.existsSync(blogsDirectory)) {
       return [];

@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Briefcase, TrendingUp, Camera, CheckCircle } from 'lucide-react';
+import { getWordPressPosts, cleanContent, truncateText } from '@/lib/wordpress';
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getWordPressPosts(4);  // Fetch 4 latest posts from WordPress
   return (
     <div className="bg-black text-white">
       {/* Hero Section - MEJORADO */}
@@ -162,46 +164,25 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Blog Posts Grid */}
+          {/* Blog Posts Grid - DINÁMICO DESDE WORDPRESS */}
           <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                title: "Fotógrafo de eventos: contar lo que pasa, de principio a fin",
-                category: "Photography",
-                link: "/blog/fotografo-de-eventos",
-                cta: "Técnica e inspiración"
-              },
-              {
-                title: "¿Web lenta o con errores? La nueva actualización de WordPress que deberías instalar hoy mismo.",
-                category: "Mantenimiento web",
-                link: "/blog/actualizacion-wordpress",
-                cta: "Diseño y recursos"
-              },
-              {
-                title: "Velocidad de carga web: Por qué tu negocio pierde clientes antes de que lean la primera frase",
-                category: "SEO Optimización",
-                link: "/blog/velocidad-de-carga-web",
-                cta: "Más de posicionamiento"
-              },
-              {
-                title: "De la Comunicación Tradicional a la IA: Cómo domino el Copywriting con Inteligencia Artificial",
-                category: "Tecnología para creadores",
-                link: "/blog/copywriting-con-inteligencia-artificial",
-                cta: "Tecnología para creadores"
-              }
-            ].map((post, idx) => (
-              <Link key={idx} href={post.link}>
-                <div className="group cursor-pointer h-full">
-                  <div className="bg-gradient-to-br from-[#FF6B35] to-orange-600 rounded-lg p-6 h-full hover:shadow-xl transition-all transform group-hover:scale-105">
-                    <p className="text-white text-xs font-bold mb-4 uppercase">{post.category}</p>
-                    <h3 className="text-white font-bold mb-4 line-clamp-3 group-hover:line-clamp-none transition-all">
-                      {post.title}
-                    </h3>
-                    <p className="text-white/90 text-sm font-bold">{post.cta}</p>
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <div className="group cursor-pointer h-full">
+                    <div className="bg-gradient-to-br from-[#FF6B35] to-orange-600 rounded-lg p-6 h-full hover:shadow-xl transition-all transform group-hover:scale-105">
+                      <p className="text-white text-xs font-bold mb-4 uppercase">Blog Post</p>
+                      <h3 className="text-white font-bold mb-4 line-clamp-3 group-hover:line-clamp-none transition-all">
+                        {post.title.rendered}
+                      </h3>
+                      <p className="text-white/90 text-sm font-bold">Leer más</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))
+            ) : (
+              <p className="text-gray-400">No hay posts disponibles</p>
+            )}
           </div>
 
           {/* View All Button */}
