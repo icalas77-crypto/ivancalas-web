@@ -15,7 +15,7 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-            <Image src="/images/logo.svg" alt="Ivan Calas" width={40} height={40} className="h-10 w-auto" />
+            <Image src="/images/logo.png" alt="Ivan Calas" width={40} height={40} className="h-10 w-auto" />
             <span className="hidden font-bold text-white sm:inline">Ivan Calas</span>
           </Link>
 
