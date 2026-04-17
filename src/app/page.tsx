@@ -5,46 +5,59 @@ import { Briefcase, TrendingUp, Camera, CheckCircle } from 'lucide-react';
 export default function Home() {
   return (
     <div className="bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+      {/* Hero Section - MEJORADO */}
+      <section className="relative overflow-hidden min-h-[85vh] flex items-center pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            {/* Hero Content - Left Side */}
+            <div className="space-y-8 z-10">
+              {/* Title Section */}
               <div>
-                <p className="text-[#FF6B35] font-bold mb-2">HOLA, SOY</p>
-                <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-4">
-                  Ivan Calas
+                <h1 className="text-5xl md:text-7xl font-bold text-[#FF6B35] leading-tight mb-2">
+                  Diseño Web y SEO para toda España
                 </h1>
-                <p className="text-xl text-gray-300">
-                  Creo paginas web rapidas y optimizadas para Google, pensadas para convertir
-                  visitas en clientes. Trabajo en remoto con negocios de toda Espana.
-                </p>
+                <p className="text-base text-white font-bold mb-6 uppercase tracking-wider">HOLA, SOY</p>
+                <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                  Iván Calás
+                </h2>
               </div>
-              <div className="flex flex-wrap gap-4">
+
+              {/* Description */}
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Creo páginas web rápidas y optimizadas para Google, pensadas para convertir visitas en clientes.
+                Trabajo en remoto con negocios de toda España.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 pt-4">
                 <Link
                   href="/contacto"
-                  className="bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-bold hover:bg-[#e05a24] transition-all uppercase"
+                  className="bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-bold hover:bg-[#e05a24] transition-all uppercase text-sm"
                 >
-                  SOLICITA PRESUPUESTO
+                  ¡SOLICITA PRESUPUESTO!
                 </Link>
                 <Link
                   href="#servicios"
-                  className="border-2 border-[#FF6B35] text-[#FF6B35] px-8 py-4 rounded-lg font-bold hover:bg-[#FF6B35] hover:text-white transition-all uppercase"
+                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-black transition-all uppercase text-sm"
                 >
                   VER SERVICIOS
                 </Link>
               </div>
-              <p className="text-sm text-gray-400 flex items-center gap-2">
-                <span>📍</span> Base en Espana · Proyectos en remoto · +20 años de experiencia
+
+              {/* Meta Info */}
+              <p className="text-sm text-gray-400 pt-4">
+                📍 Base en España · Proyectos en remoto · +20 años de experiencia
               </p>
             </div>
-            <div className="hidden md:block">
+
+            {/* Hero Image - Right Side */}
+            <div className="hidden md:flex items-center justify-end">
               <Image
                 src="/images/movil-preview.webp"
                 alt="Ivan Calas - Diseño web y SEO"
-                width={400}
-                height={500}
-                className="rounded-lg object-cover w-full"
+                width={480}
+                height={640}
+                className="rounded-lg object-cover filter brightness-75"
                 priority
               />
             </div>
@@ -134,21 +147,106 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#FF6B35] to-orange-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Hablemos de tu proyecto
-          </h2>
-          <p className="text-lg text-white/90 mb-8">
-            Cuentame tu idea y te propongo la mejor estrategia para mejorar tu presencia online.
-          </p>
-          <Link
-            href="/contacto"
-            className="bg-white text-[#FF6B35] px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-all uppercase inline-block"
-          >
-            ESCRIBEME
-          </Link>
+      {/* Blog Section - NUEVO */}
+      <section className="py-24 bg-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="mb-16">
+            <p className="text-[#FF6B35] font-bold mb-4 uppercase text-sm">EN NUESTRO BLOG</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Últimas Novedades y Consejos de Diseño Web, SEO y Fotografía
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl">
+              Mantente al día con las últimas tendencias en diseño web, SEO, UX/UI y fotografía profesional. 
+              Comparto consejos prácticos y estrategias para impulsar tu proyecto digital.
+            </p>
+          </div>
+
+          {/* Blog Posts Grid */}
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Fotógrafo de eventos: contar lo que pasa, de principio a fin",
+                category: "Photography",
+                link: "/blog/fotografo-de-eventos",
+                cta: "Técnica e inspiración"
+              },
+              {
+                title: "¿Web lenta o con errores? La nueva actualización de WordPress que deberías instalar hoy mismo.",
+                category: "Mantenimiento web",
+                link: "/blog/actualizacion-wordpress",
+                cta: "Diseño y recursos"
+              },
+              {
+                title: "Velocidad de carga web: Por qué tu negocio pierde clientes antes de que lean la primera frase",
+                category: "SEO Optimización",
+                link: "/blog/velocidad-de-carga-web",
+                cta: "Más de posicionamiento"
+              },
+              {
+                title: "De la Comunicación Tradicional a la IA: Cómo domino el Copywriting con Inteligencia Artificial",
+                category: "Tecnología para creadores",
+                link: "/blog/copywriting-con-inteligencia-artificial",
+                cta: "Tecnología para creadores"
+              }
+            ].map((post, idx) => (
+              <Link key={idx} href={post.link}>
+                <div className="group cursor-pointer h-full">
+                  <div className="bg-gradient-to-br from-[#FF6B35] to-orange-600 rounded-lg p-6 h-full hover:shadow-xl transition-all transform group-hover:scale-105">
+                    <p className="text-white text-xs font-bold mb-4 uppercase">{post.category}</p>
+                    <h3 className="text-white font-bold mb-4 line-clamp-3 group-hover:line-clamp-none transition-all">
+                      {post.title}
+                    </h3>
+                    <p className="text-white/90 text-sm font-bold">{post.cta}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="text-center mt-12">
+            <Link
+              href="/blog"
+              className="border-2 border-[#FF6B35] text-[#FF6B35] px-8 py-4 rounded-lg font-bold hover:bg-[#FF6B35] hover:text-white transition-all uppercase inline-block"
+            >
+              VER TODOS LOS ARTÍCULOS
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="py-24 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Content Left */}
+            <div className="space-y-8">
+              <h2 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+                ¡Hablemos de tu proyecto!
+              </h2>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Cuéntame tu idea y te propongo la mejor estrategia para mejorar tu presencia online.
+                Diseño webs rápidas y optimizadas para Google, enfocadas en convertir visitas en clientes.
+                Trabajo con empresas y profesionales en toda España y en remoto.
+              </p>
+              <Link
+                href="/contacto"
+                className="bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-bold hover:bg-[#e05a24] transition-all uppercase inline-block text-sm w-full md:w-auto text-center"
+              >
+                ESCRÍBEME
+              </Link>
+            </div>
+
+            {/* Image Right - IVAN'S PHOTO */}
+            <div className="hidden md:flex items-center justify-end">
+              <Image
+                src="/images/ivan-calas.webp"
+                alt="Iván Calás - Diseñador Web y Especialista en SEO"
+                width={500}
+                height={600}
+                className="rounded-lg object-cover filter brightness-110"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </div>
