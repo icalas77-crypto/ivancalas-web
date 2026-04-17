@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Award, Users, Target, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -33,9 +34,14 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="hidden md:block">
-              <div className="aspect-square bg-gradient-to-br from-[#FF6B35] to-orange-900 rounded-lg flex items-center justify-center">
-                <p className="text-lg text-white/80">Foto de perfil</p>
-              </div>
+              <Image
+                src="/images/ivan-calas.webp"
+                alt="Ivan Calas - Diseñador Web y Especialista en SEO"
+                width={500}
+                height={600}
+                className="rounded-lg object-cover w-full h-full"
+                priority
+              />
             </div>
           </div>
         </div>

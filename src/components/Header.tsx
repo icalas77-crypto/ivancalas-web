@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -14,9 +15,7 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF6B35] text-lg font-bold text-white">
-              IC
-            </div>
+            <Image src="/images/logo.svg" alt="Ivan Calas" width={40} height={40} className="h-10 w-auto" />
             <span className="hidden font-bold text-white sm:inline">Ivan Calas</span>
           </Link>
 
